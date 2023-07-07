@@ -4,6 +4,8 @@ import { Montserrat } from 'next/font/google';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import 'antd/dist/reset.css';
+import 'reset.css';
+import '@styles/global.css';
 
 const font = Montserrat({
 	weight: ['900', '700', '600', '500'],

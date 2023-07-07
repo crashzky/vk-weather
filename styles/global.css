@@ -1,0 +1,11 @@
+:root {
+	--primary-color: #FF6847;
+	--dark-grey: #2E2E2E;
+	--grey: rgba(169, 169, 169, 0.50);
+	--light-grey: #4E4E4E;
+}
+
+body {
+	background-color: #F7F7F7;
+	color: var(--dark-grey);
+}
