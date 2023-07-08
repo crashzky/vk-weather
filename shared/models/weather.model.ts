@@ -2,7 +2,7 @@ type weatherCondition = 'clear' | 'partly-cloudy' | 'cloudy' | 'overcast' | 'lig
 	| 'wet-snow' | 'light-snow' | 'snow' | 'snow-showers' | 'hail' | 'thunderstorm' | 'thunderstorm-with-rain'
 	| 'thunderstorm-with-hail' | 'showers';
 
-type weatherWindDir = 'nw' | 'n' | 'ne' | 'e' | 'se' | 's' | 'sw' | 'w' | 'c';
+export type weatherWindDir = 'nw' | 'n' | 'ne' | 'e' | 'se' | 's' | 'sw' | 'w' | 'c';
 
 type weatherDaytime = 'd' | 'n';
 

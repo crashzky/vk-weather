@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+	display: grid;
+
 	width: fit-content;
 
-	display: grid;
-	
 	grid-template-columns: repeat(2, auto);
 	column-gap: 7px;
 	row-gap: 11px;

@@ -14,6 +14,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "antd": "^5.6.4",
     "axios": "^1.4.0",
+    "date-fns": "^2.30.0",
     "lucide-react": "^0.258.0",
     "next": "13.4.9",
     "react": "18.2.0",
@@ -41,7 +42,6 @@
     "eslint-config-next": "13.4.9",
     "eslint-plugin-storybook": "^0.6.12",
     "storybook": "^7.0.26",
-    "tsconfig-paths-webpack-plugin": "^4.0.1",
     "typescript": "5.1.6"
   }
 }

@@ -25,7 +25,8 @@
 	  "@models/*": ["./shared/models/*"],
 	  "@components/*": ["./components/*"],
 	  "@styles/*": ["./styles/*"],
-	  "@stories/*": ["./stories/*"]
+	  "@stories/*": ["./stories/*"],
+	  "@utils/*": ["./utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

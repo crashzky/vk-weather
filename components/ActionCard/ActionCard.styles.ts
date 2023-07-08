@@ -7,48 +7,52 @@ interface ContainerProps {
 }
 
 export const Container = styled.div<ContainerProps>`
-	width: ${(props) => props.size === 'm' ? '160px' : '250px'};
-	height: 160px;
-
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 
-	border-radius: 25px;
+	width: ${(props) => props.size === 'm' ? '160px' : '250px'};
+	height: 160px;
+
 	border: 0.5px solid var(--grey);
+
+	border-radius: 25px;
 
 	backdrop-filter: blur(4px);
 `;
 
 export const Title = styled.p`
-	font-size: 14px;
-	font-weight: 900;
-	text-transform: uppercase;
-
 	margin-top: 20px;
 	margin-left: 22px;
+
+	text-transform: uppercase;
+
+	font-size: 14px;
+	font-weight: 900;
 `;
 
 export const ButtonsContainer = styled.div`
 	display: flex;
 	justify-content: right;
-	gap: 7px;
+
+	margin-right: 16px;
 
 	margin-bottom: 16px;
-	margin-right: 16px;
+	gap: 7px;
 `;
 
 export const Button = styled.button`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
 	width: 40px;
 	height: 40px;
 
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
 	cursor: pointer;
-	background-color: transparent;
+
+	border: 1px solid var(--grey);
 	
 	border-radius: 100%;
-	border: 1px solid var(--grey)
+	background-color: transparent;
 `;

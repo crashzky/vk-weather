@@ -2,7 +2,7 @@ import type { StorybookConfig } from '@storybook/nextjs';
 import path from 'path';
 import fs from 'fs';
 
-interface IPath {
+interface IPaths {
 	[index: string]: string[];
 }
 
@@ -22,10 +22,9 @@ const config: StorybookConfig = {
 	},
 	webpackFinal: (config) => {
 		const tsconfigRaw = fs.readFileSync(path.resolve(__dirname, '../tsconfig.json')).toString();
-		const paths: IPath = JSON.parse(tsconfigRaw).compilerOptions.paths;
+		const paths: IPaths = JSON.parse(tsconfigRaw).compilerOptions.paths;
 
 		for(let [alias, resolves] of Object.entries(paths)) {
-
 			alias = alias.slice(0, alias.length - 2);
 
 			let resolve = resolves[0];
