@@ -24,6 +24,7 @@
 	  "@shared/*": ["./shared/*"],
 	  "@models/*": ["./shared/models/*"],
 	  "@components/*": ["./components/*"],
+	  "@modals/*": ["./modals/*"],
 	  "@styles/*": ["./styles/*"],
 	  "@stories/*": ["./stories/*"],
 	  "@utils/*": ["./utils/*"]

@@ -1,6 +1,6 @@
 import { weatherWindDir } from '@models/weather.model';
 
-export function getWindDirection(direction: weatherWindDir): string {
+function getWindDirection(direction: weatherWindDir): string {
 	switch(direction) {
 		case 'c':
 			return '';
@@ -22,3 +22,5 @@ export function getWindDirection(direction: weatherWindDir): string {
 			return 'ЮЗ';
 	}
 }
+
+export default getWindDirection;

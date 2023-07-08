@@ -2,8 +2,8 @@ import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 
 import SmalWeatherValueCard from '@components/SmalWeatherValueCard';
-import { formatTemp } from '@utils/formatTemp';
-import { getWindDirection } from '@utils/getWindDirection';
+import formatTemp from '@utils/formatTemp';
+import getWindDirection from '@utils/getWindDirection';
 
 import Props from './WeatherFutureCard.props';
 import { AdditionalInfo, Container, Line, TempContainer, Title } from './WeatherFutureCard.styles';

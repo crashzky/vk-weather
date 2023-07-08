@@ -3,10 +3,11 @@ import styled from 'styled-components';
 export const Container = styled.button`
 	display: grid;
 
-	width: 200px;
-	padding: 16px;
+	width: 210px;
 
 	padding: 16px;
+
+	cursor: pointer;
 
 	border: 1px solid var(--grey);
 

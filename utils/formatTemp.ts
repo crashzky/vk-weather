@@ -1,4 +1,6 @@
-export function formatTemp(temp: number): string {
+function formatTemp(temp: number): string {
+	temp = Math.round(temp);
+
 	if(temp > 0)
 		return `+${temp}`;
 	else if(temp === 0)
@@ -6,3 +8,5 @@ export function formatTemp(temp: number): string {
 	else
 		return temp.toString();
 }
+
+export default formatTemp;
