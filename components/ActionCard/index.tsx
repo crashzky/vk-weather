@@ -3,7 +3,7 @@ import { ArrowRight, Plus, Settings, Trash2 } from 'lucide-react';
 import Props, { buttonIconType } from './ActionCard.props';
 import { Button, ButtonsContainer, Container, Title } from './ActionCard.styles';
 
-const ActionCard: React.FC<Props> = ({ title, size = 'm', actionButtons = [], ...props }) => {
+const ActionCard: React.FC<Props> = ({ title, size = 'm', actionButtons = [], className = '', ...props }) => {
 	function getIcon(type: buttonIconType) {
 		const iconProps = {
 			size: 20,
@@ -23,7 +23,7 @@ const ActionCard: React.FC<Props> = ({ title, size = 'm', actionButtons = [], ..
 	}
 
 	return (
-		<Container size={size} {...props}>
+		<Container size={size} className={`actionCard ${className}`} {...props}>
 			<Title>
 				{title}
 			</Title>
