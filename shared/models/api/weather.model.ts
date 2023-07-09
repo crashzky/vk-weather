@@ -1,6 +1,7 @@
 import { IWeatherInfo } from '@models/weatherInfo.model';
 import { IWeatherFact } from '@models/weatherFact.model';
 import { IWeatherGeoObject } from '@models/weatherGeoObject.model';
+import { IWeatherForecast } from '@models/weatherForecast.model';
 
 export interface IGetWeatherRequest {
 	lat: number;
@@ -12,6 +13,6 @@ export interface IGetWeatherResponse {
 	now_dt: string;
 	info: IWeatherInfo;
 	fact: IWeatherFact;
-	forecasts: unknown;
+	forecasts: IWeatherForecast[];
 	geo_object: IWeatherGeoObject;
 }

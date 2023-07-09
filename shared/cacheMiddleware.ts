@@ -14,6 +14,7 @@ const cacheMiddleware: Middleware = (store) => (next) => (action) => {
 
 	localState.positions.initialPosition = null;
 	localState.pageLoaded = false;
+	localState.forecast = null;
 	localState.modal.modalName = null;
 	localState.modal.payload = null;
 

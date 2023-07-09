@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 
-import { default as modalReducer } from '@shared/slices/modalSlice';
-import { default as positionReducer } from '@shared/slices/positionsSlice';
-import { default as pageLoadedReducer } from '@shared/slices/pageLoadedSlice';
+import modalReducer from '@shared/slices/modalSlice';
+import positionReducer from '@shared/slices/positionsSlice';
+import pageLoadedReducer from '@shared/slices/pageLoadedSlice';
+import forecastReducer from '@shared/slices/forecastSlice';
 
 import cacheMiddleware from '@shared/cacheMiddleware';
 import preloadState from '@shared/preloadState';
@@ -13,6 +14,7 @@ const store = configureStore({
 		modal: modalReducer,
 		positions: positionReducer,
 		pageLoaded: pageLoadedReducer,
+		forecast: forecastReducer,
 	},
 	preloadedState: preloadState(),
 	middleware: [cacheMiddleware],

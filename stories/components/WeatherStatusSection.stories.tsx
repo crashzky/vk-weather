@@ -13,6 +13,9 @@ type Story = StoryObj<typeof WeatherStatusSection>;
 
 export const Primary: Story = {
 	args: {
+		positionName: 'Текущая геопозиция',
+		lat: 55.754005,
+		lon: 37.648403,
 		city: 'Калининград',
 		weatherStatus: 'Облачно, с прояснениями',
 		date: new Date(Date.now()),
@@ -23,5 +26,6 @@ export const Primary: Story = {
 		humidity: 51,
 		windSpeed: 2.0,
 		windDirection: 'nw',
+		yandexWeatherUrl: '#',
 	},
 };

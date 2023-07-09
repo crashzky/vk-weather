@@ -13,6 +13,6 @@ type Story = StoryObj<typeof WeatherFutureSection>;
 
 export const Primary: Story = {
 	args: {
-		
+		forecasts: [],
 	},
 };

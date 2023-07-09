@@ -47,4 +47,5 @@ export const selectInitialPosition = (state: RootState): IState['initialPosition
 export const selectOtherPositions = (state: RootState): IState['otherPositions'] => state.positions.otherPositions;
 export const selectOtherPositionById = (state: RootState, positionId: number): IPosition =>
 	state.positions.otherPositions[positionId];
-	
+export const selectHasPositionById = (state: RootState, positionId: number): boolean =>
+	Object.keys(state.positions.otherPositions).includes(positionId.toString());

@@ -1,4 +1,4 @@
-type weatherCondition = 'clear' | 'partly-cloudy' | 'cloudy' | 'overcast' | 'light-rain' | 'rain' | 'heavy-rain'
+export type weatherCondition = 'clear' | 'partly-cloudy' | 'cloudy' | 'overcast' | 'light-rain' | 'rain' | 'heavy-rain'
 	| 'wet-snow' | 'light-snow' | 'snow' | 'snow-showers' | 'hail' | 'thunderstorm' | 'thunderstorm-with-rain'
 	| 'thunderstorm-with-hail' | 'showers';
 

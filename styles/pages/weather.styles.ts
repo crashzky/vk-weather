@@ -19,11 +19,6 @@ export const WeekTitle = styled.h2`
 	}
 `;
 
-export const Underlined = styled.span`
-	text-decoration: underline;
-	text-decoration-color: #FF6847;
-`;
-
 export const WeekConainer = styled.div`
 	display: flex;
 	flex-wrap: wrap;
@@ -36,4 +31,17 @@ export const WeekConainer = styled.div`
 	@media (max-width: 475px) {
 		justify-content: center;
 	}
+`;
+
+export const Center = styled.div`
+	width: 100vw;
+	height: 100vh;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
+export const PreloaderPlug = styled.div`
+	width: 100px;
 `;

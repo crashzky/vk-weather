@@ -5,13 +5,17 @@ import ActionCard from '@components/ActionCard';
 import WeatherValueCard from '@components/WeatherValueCard';
 import formatTemp from '@utils/formatTemp';
 import getWindDirection from '@utils/getWindDirection';
+import { useAppDispatch } from '@shared/store';
+import { setActiveForecast } from '@shared/slices/forecastSlice';
 
 import Props from './WeatherStatusSection.props';
 import { ButtonsContainer, City, Container, Label, StatusLabel, ValuesContainer } from './WeatherStatusSection.styles';
 
 const WeatherStatusSection: React.FC<Props> = ({ city, weatherStatus, date, utcHoursOffset, temp, feelTemp,
-	pressure, humidity, windSpeed, windDirection, ...props }) => {
+	pressure, humidity, windSpeed, windDirection, positionName, lat, lon, yandexWeatherUrl, ...props }) => {
 	const router = useRouter();
+
+	const dispatch = useAppDispatch();
 
 	return (
 		<Container {...props}>
@@ -23,10 +27,10 @@ const WeatherStatusSection: React.FC<Props> = ({ city, weatherStatus, date, utcH
 					{weatherStatus}
 				</StatusLabel>
 				<Label>
-					Текущая геопозиция
+					{positionName}
 				</Label>
 				<Label>
-					55.753448, 37.648232
+					{`${lat}, ${lon}`}
 				</Label>
 				<Label>
 					{format(addHours(date, utcHoursOffset), 'HH:mm')}
@@ -40,7 +44,10 @@ const WeatherStatusSection: React.FC<Props> = ({ city, weatherStatus, date, utcH
 						actionButtons={[
 							{
 								icon: 'arrow-right',
-								onClick: () => router.push('/'),
+								onClick: () => {
+									dispatch(setActiveForecast(null));
+									router.push('/');
+								},
 							},
 						]} />
 					<ActionCard
@@ -49,7 +56,7 @@ const WeatherStatusSection: React.FC<Props> = ({ city, weatherStatus, date, utcH
 						actionButtons={[
 							{
 								icon: 'arrow-right',
-								onClick: () => null,
+								onClick: () => window.open(yandexWeatherUrl),
 							},
 						]} />
 				</ButtonsContainer>
