@@ -1,8 +1,10 @@
+import { useEffect } from 'react';
 import { Form, Input, Modal, ModalProps } from 'antd';
 import { useSelector } from 'react-redux';
 
+import { RootState, useAppDispatch } from '@shared/store';
 import { closeModal, selectActiveModal } from '@shared/slices/modalSlice';
-import { useAppDispatch } from '@shared/store';
+import { selectOtherPositionById, updatePostition } from '@shared/slices/positionsSlice';
 
 interface IForm {
 	lat: string;
@@ -10,16 +12,44 @@ interface IForm {
 	name: string;
 }
 
-const SettingsGeoModal: React.FC<ModalProps> = ({ ...props }) => {
+const SettingsPositionModal: React.FC<ModalProps> = ({ ...props }) => {
 	const activeModal = useSelector(selectActiveModal);
+	const currentPosition = useSelector((state: RootState) => selectOtherPositionById(state, activeModal.payload));
+
 	const dispatch = useAppDispatch();
 
 	const [form] = Form.useForm<IForm>();
+
+	const onFinish = (values: IForm) => {
+		const { name, lat, lon } = values;
+
+		dispatch(updatePostition({
+			id: activeModal.payload,
+			position: {
+				name,
+				lat: +lat,
+				lon: +lon,
+			},
+		}));
+		dispatch(closeModal());
+	};
+
+	useEffect(() => {
+		if(currentPosition) {
+			const { name, lat, lon } = currentPosition;
+		
+			form.setFieldsValue({
+				name,
+				lat: lat.toString(),
+				lon: lon.toString(),
+			});
+		}
+	}, [currentPosition]);
 	
 	return (
 		<Modal
 			title='Редактирование геопозиции'
-			open={activeModal.modalName === 'editGeo'}
+			open={activeModal.modalName === 'editPosition'}
 			cancelText='Отмена'
 			okText='Сохранить'
 			onCancel={() => dispatch(closeModal())}
@@ -29,7 +59,7 @@ const SettingsGeoModal: React.FC<ModalProps> = ({ ...props }) => {
 			<Form
 				form={form}
 				layout='vertical'
-				onFinish={() => dispatch(closeModal())}
+				onFinish={onFinish}
 			>
 				<Form.Item
 					name='name'
@@ -60,4 +90,4 @@ const SettingsGeoModal: React.FC<ModalProps> = ({ ...props }) => {
 	);
 };
 
-export default SettingsGeoModal;
+export default SettingsPositionModal;

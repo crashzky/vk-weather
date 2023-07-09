@@ -1,13 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '@shared/store';
+import { IState } from '@models/slices/modal.model';
 
-interface State {
-	modalName: string | null;
-	payload: any;
-}
-
-const initialState: State = {
+const initialState: IState = {
 	modalName: null,
 	payload: null,
 };
@@ -16,7 +12,7 @@ const slice = createSlice({
 	name: 'modal',
 	initialState,
 	reducers: {
-		openModal(state, action: PayloadAction<State>) {
+		openModal(state, action: PayloadAction<IState>) {
 			return action.payload;
 		},
 
@@ -30,4 +26,4 @@ export default slice.reducer;
 
 export const { openModal, closeModal } = slice.actions;
 
-export const selectActiveModal = (state: RootState): State => state.modal;
+export const selectActiveModal = (state: RootState): IState => state.modal;

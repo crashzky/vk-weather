@@ -3,24 +3,38 @@ import { useSelector } from 'react-redux';
 
 import { useAppDispatch } from '@shared/store';
 import { closeModal, selectActiveModal } from '@shared/slices/modalSlice';
+import { addPosition } from '@shared/slices/positionsSlice';
 
 interface IForm {
+	name: string;
 	lat: string;
 	lon: string;
 }
 
-const NewGeoModal: React.FC<ModalProps> = ({ ...props }) => {
+const NewPositionModal: React.FC<ModalProps> = ({ ...props }) => {
 	const activeModal = useSelector(selectActiveModal);
+
 	const dispatch = useAppDispatch();
 
 	const [form] = Form.useForm<IForm>();
 
+	const onFinish = (values: IForm) => {
+		const { name, lat, lon } = values;
+
+		dispatch(addPosition({
+			name,
+			lat: +lat,
+			lon: +lon,
+		}));
+		dispatch(closeModal());
+	};
+
 	return (
 		<Modal
-			title='Введите координаты геопозиции'
+			title='Создание новой геопозиции'
 			cancelText='Отмена'
 			okText='Готово'
-			open={activeModal.modalName === 'newGeo'}
+			open={activeModal.modalName === 'newPosition'}
 			onOk={() => form.submit()}
 			onCancel={() => dispatch(closeModal())}
 			{...props}
@@ -28,8 +42,16 @@ const NewGeoModal: React.FC<ModalProps> = ({ ...props }) => {
 			<Form
 				form={form}
 				layout='vertical'
-				onFinish={() => dispatch(closeModal())}
+				onFinish={onFinish}
 			>
+				<Form.Item
+					name='name'
+					label='Название геопозиции'
+					required
+					rules={[{ required: true, message: 'Заполните это поле' }]}
+				>
+					<Input placeholder='Название геопозиции' />
+				</Form.Item>
 				<Form.Item
 					name='lat'
 					label='Широта (lat)'
@@ -51,4 +73,4 @@ const NewGeoModal: React.FC<ModalProps> = ({ ...props }) => {
 	);
 };
 
-export default NewGeoModal;
+export default NewPositionModal;

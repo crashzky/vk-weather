@@ -1,63 +1,92 @@
-import { Button } from 'antd';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 import { useGeolocated } from 'react-geolocated';
+import { Button } from 'antd';
 
+import ActionCard from '@components/ActionCard';
 import { useAppDispatch } from '@shared/store';
 import { openModal } from '@shared/slices/modalSlice';
-import ActionCard from '@components/ActionCard';
+import { addInitialPosition, selectInitialPosition, selectOtherPositions } from '@shared/slices/positionsSlice';
+import { selectPageLoaded, setPageLoaded } from '@shared/slices/pageLoadedSlice';
 
-import NewGeoModal from '@modals/NewGeoModal';
-import RemoveGeoModal from '@modals/RemoveGeoModal';
-import SettingsGeoModal from '@modals/SettingsGeoModal';
+import NewPositionModal from '@modals/NewPositionModal';
+import RemovePositionModal from '@modals/RemovePositionModal';
+import SettingsPositionModal from '@modals/SettingsPositionModal';
 
 import { CardsContainer, ErrorMessage, Main, Title } from '@styles/pages/main.styles';
 
 const MainPage: React.FC = () => {
-	const dispatcher = useAppDispatch();
+	const pageLoaded = useSelector(selectPageLoaded);
+	const initialPosition = useSelector(selectInitialPosition);
+	const otherPositions = useSelector(selectOtherPositions);
 
-	const { coords, isGeolocationAvailable, isGeolocationEnabled, getPosition } = useGeolocated();
+	const dispatch = useAppDispatch();
+
+	const router = useRouter();
+
+	const { isGeolocationAvailable, isGeolocationEnabled, getPosition } = useGeolocated({
+		onSuccess: (position) => {
+			const { latitude, longitude } = position.coords;
+
+			dispatch(addInitialPosition({
+				lat: latitude,
+				lon: longitude,
+			}));
+		},
+	});
+
+	useEffect(() => {
+		dispatch(setPageLoaded());
+	}, []);
 
 	return (
 		<Main>
-			<NewGeoModal />
-			<RemoveGeoModal />
-			<SettingsGeoModal />
+			<NewPositionModal />
+			<RemovePositionModal />
+			<SettingsPositionModal />
 
 			<Title>
 				Выберите геопозицию
 			</Title>
 			<CardsContainer>
-				<ActionCard
-					title='Текущая геопозиция'
-					size='l'
-					actionButtons={[
-						{
-							icon: 'arrow-right',
-							onClick: () => null,
-						},
-					]} />
-				<ActionCard
-					title='Текущая геопозиция'
-					size='l'
-					actionButtons={[
-						{
-							icon: 'settings',
-							onClick: () => dispatcher(openModal({ modalName: 'editGeo', payload: null })),
-						},
-						{
-							icon: 'trash',
-							onClick: () => dispatcher(openModal({ modalName: 'removeGeo', payload: null })),
-						},
-						{
-							icon: 'arrow-right',
-							onClick: () => null,
-						},
-					]} />
+				{(initialPosition && pageLoaded) && (
+					<ActionCard
+						title={initialPosition.name}
+						size='l'
+						actionButtons={[
+							{
+								icon: 'arrow-right',
+								onClick: () => router.push('/initial'),
+							},
+						]} />
+				)}
+				{(otherPositions && pageLoaded) && otherPositions.map((i, num) => (
+					<ActionCard
+						key={num}
+						title={i.name}
+						size='l'
+						actionButtons={[
+							{
+								icon: 'settings',
+								onClick: () => dispatch(openModal({ modalName: 'editPosition', payload: num })),
+							},
+							{
+								icon: 'trash',
+								onClick: () => dispatch(openModal({ modalName: 'removePosition', payload: num })),
+							},
+							{
+								icon: 'arrow-right',
+								onClick: () => router.push(`/${num}`),
+							},
+						]} />
+				))}
 				<ActionCard
 					title='добавить новую'
 					actionButtons={[
 						{
 							icon: 'plus',
-							onClick: () => dispatcher(openModal({ modalName: 'newGeo', payload: null })),
+							onClick: () => dispatch(openModal({ modalName: 'newPosition', payload: null })),
 						},
 					]} />
 			</CardsContainer>
@@ -72,10 +101,10 @@ const MainPage: React.FC = () => {
 					</Button>
 				</>
 			)}
-			{(!isGeolocationAvailable && typeof window !== 'undefined') && (
+			{(!isGeolocationAvailable && pageLoaded) && (
 				<ErrorMessage>
 					К сожалению, ваш браузер не поддерживает автоопределение геопозиции, но вы всё ещё можете задать
-					геопозицию в ручную.
+					геопозицию вручную.
 				</ErrorMessage>
 			)}
 		</Main>
