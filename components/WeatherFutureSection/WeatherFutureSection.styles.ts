@@ -12,6 +12,10 @@ export const Title = styled.h2`
 
 	font-size: 88px;
 	font-weight: 900;
+
+	@media (max-width: 475px) {
+		font-size: 40px;
+	}
 `;
 
 export const Label = styled.p`

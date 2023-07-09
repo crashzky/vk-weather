@@ -13,6 +13,10 @@ export const WeekTitle = styled.h2`
 
 	font-size: 56px;
 	font-weight: 900;
+
+	@media (max-width: 475px) {
+		font-size: 40px;
+	}
 `;
 
 export const Underlined = styled.span`
@@ -28,4 +32,8 @@ export const WeekConainer = styled.div`
 
 	margin-top: 57px;
 	margin-bottom: 70px;
+
+	@media (max-width: 475px) {
+		justify-content: center;
+	}
 `;
