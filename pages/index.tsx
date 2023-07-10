@@ -28,6 +28,7 @@ const MainPage: React.FC = () => {
 	const [messageApi, contextHolder] = message.useMessage();
 
 	const { isGeolocationAvailable, isGeolocationEnabled, getPosition } = useGeolocated({
+		watchLocationPermissionChange: true,
 		onSuccess: (position) => {
 			const { latitude, longitude } = position.coords;
 
@@ -93,7 +94,7 @@ const MainPage: React.FC = () => {
 						},
 					]} />
 			</CardsContainer>
-			{!isGeolocationEnabled && (
+			{(!isGeolocationEnabled && !initialPosition) && (
 				<>
 					<ErrorMessage>
 						Вы не разрешили доступ к геопозиции. Без этого мы не сможем показать погоду по вашему
