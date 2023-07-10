@@ -14,6 +14,8 @@ yarn dev
 
 Задеплоенный сайт доступен по адресу [https://weather-vk.vercel.app](https://weather-vk.vercel.app)
 
+![](assets/demo.gif)
+
 ## Storybook
 
 Также вы можете посмотреть storybook: 
