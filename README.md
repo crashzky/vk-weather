@@ -2,13 +2,17 @@
 
 Для запуска в режиме разработки:
 
+1. Создайте .env файл с переменной WEATHER_API_KEY, api ключ можно получить [здесь](https://yandex.ru/dev/weather/).
+Пример файла [.env.example](./.env.example)
+
+2. Запустите в консоли:
 ```bash
 npm run dev
 # или
 yarn dev
 ```
 
-Откройте [http://localhost:3000](http://localhost:3000) в вашем браузере.
+3. Откройте [http://localhost:3000](http://localhost:3000) в вашем браузере.
 
 ## Запуск в браузере
 
