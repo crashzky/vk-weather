@@ -28,6 +28,7 @@ const WeatherPage: React.FC = () => {
 
 	const { data } = useQuery(['getWeather', position], () => getWeather(position!), {
 		enabled: !!position,
+		onError: () => router.push('/500'),
 	});
 
 	useEffect(() => {
