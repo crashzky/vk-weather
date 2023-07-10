@@ -9,9 +9,9 @@ import Props from './WeatherFutureCard.props';
 import { AdditionalInfo, Container, Line, TempContainer, Title } from './WeatherFutureCard.styles';
 
 const WeatherFutureCard: React.FC<Props> = ({ date, minTemp, maxTemp, avgTemp, feelsTemp, pressure, humidity, windSpeed,
-	windDirection, additionalMessage, ...props }) => {	
+	windDirection, additionalMessage, className = '', ...props }) => {	
 	return (
-		<Container {...props}>
+		<Container className={`${className} weatherFutureCard`} {...props}>
 			<Title>
 				{format(date, 'dd MMMM yyyy', {
 					locale: ru,

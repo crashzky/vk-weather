@@ -12,7 +12,7 @@ import { selectActiveForecast } from '@shared/slices/forecastSlice';
 import Props from './WeatherFutureSection.props';
 import { Container, Label, Title, ValuesContainer } from './WeatherFutureSection.styles';
 
-const WeatherFutureSection: React.FC<Props> = ({ forecasts, ...props }) => {
+const WeatherFutureSection: React.FC<Props> = ({ forecasts, className = '', ...props }) => {
 	const activeForecast = useSelector(selectActiveForecast);
 
 	const ref = useRef() as MutableRefObject<HTMLElement>;
@@ -30,7 +30,7 @@ const WeatherFutureSection: React.FC<Props> = ({ forecasts, ...props }) => {
 			= forecasts[activeForecast].parts.day;
 
 		return (
-			<Container ref={ref} {...props}>
+			<Container ref={ref} className={`${className} weatherFutureSection`} {...props}>
 				<Title>
 					{format(new Date(forecasts[activeForecast].date), 'dd MMMM yyyy', {
 						locale: ru,

@@ -1,9 +1,11 @@
-import { Form, Input, Modal, ModalProps } from 'antd';
+import { Form, Input, Modal } from 'antd';
 import { useSelector } from 'react-redux';
 
 import { useAppDispatch } from '@shared/store';
 import { closeModal, selectActiveModal } from '@shared/slices/modalSlice';
 import { addPosition } from '@shared/slices/positionsSlice';
+
+import Props from './NewPositionModal.props';
 
 interface IForm {
 	name: string;
@@ -11,7 +13,7 @@ interface IForm {
 	lon: string;
 }
 
-const NewPositionModal: React.FC<ModalProps> = ({ ...props }) => {
+const NewPositionModal: React.FC<Props> = ({ messageApi, ...props }) => {
 	const activeModal = useSelector(selectActiveModal);
 
 	const dispatch = useAppDispatch();
@@ -27,6 +29,7 @@ const NewPositionModal: React.FC<ModalProps> = ({ ...props }) => {
 			lon: +lon,
 		}));
 		dispatch(closeModal());
+		messageApi.success('Геопозиция создана');
 	};
 
 	return (

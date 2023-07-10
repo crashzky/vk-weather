@@ -1,17 +1,20 @@
-import { Modal, ModalProps } from 'antd';
+import { Modal } from 'antd';
 import { useSelector } from 'react-redux';
 
 import { useAppDispatch } from '@shared/store';
 import { closeModal, selectActiveModal } from '@shared/slices/modalSlice';
 import { removePosition } from '@shared/slices/positionsSlice';
 
-const RemovePositionModal: React.FC<ModalProps> = ({ ...props }) => {
+import Props from './RemovePositionModal.props';
+
+const RemovePositionModal: React.FC<Props> = ({ messageApi, ...props }) => {
 	const activeModal = useSelector(selectActiveModal);
 	const dispatch = useAppDispatch();
 
 	const onOk = () => {
 		dispatch(removePosition(activeModal.payload));
 		dispatch(closeModal());
+		messageApi.success('Геопозиция удалена');
 	};
 
 	return (

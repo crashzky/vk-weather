@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
-import { Form, Input, Modal, ModalProps } from 'antd';
+import { Form, Input, Modal } from 'antd';
 import { useSelector } from 'react-redux';
 
 import { RootState, useAppDispatch } from '@shared/store';
 import { closeModal, selectActiveModal } from '@shared/slices/modalSlice';
 import { selectOtherPositionById, updatePostition } from '@shared/slices/positionsSlice';
+
+import Props from './SettingsPositionModal.props';
 
 interface IForm {
 	lat: string;
@@ -12,7 +14,7 @@ interface IForm {
 	name: string;
 }
 
-const SettingsPositionModal: React.FC<ModalProps> = ({ ...props }) => {
+const SettingsPositionModal: React.FC<Props> = ({ messageApi, ...props }) => {
 	const activeModal = useSelector(selectActiveModal);
 	const currentPosition = useSelector((state: RootState) => selectOtherPositionById(state, activeModal.payload));
 
@@ -32,6 +34,7 @@ const SettingsPositionModal: React.FC<ModalProps> = ({ ...props }) => {
 			},
 		}));
 		dispatch(closeModal());
+		messageApi.success('Геопозиция обновлена');
 	};
 
 	useEffect(() => {

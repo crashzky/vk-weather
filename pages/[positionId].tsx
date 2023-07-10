@@ -54,7 +54,7 @@ const WeatherPage: React.FC = () => {
 					positionName={position!.name}
 					lat={position!.lat}
 					lon={position!.lon}
-					city={data.geo_object.locality.name}
+					city={data.geo_object.locality?.name || position!.name}
 					weatherStatus={getWeatherStatus(condition)}
 					temp={temp}
 					feelTemp={feels_like}

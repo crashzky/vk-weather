@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { useGeolocated } from 'react-geolocated';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 
 import ActionCard from '@components/ActionCard';
 import { useAppDispatch } from '@shared/store';
@@ -25,6 +25,8 @@ const MainPage: React.FC = () => {
 
 	const router = useRouter();
 
+	const [messageApi, contextHolder] = message.useMessage();
+
 	const { isGeolocationAvailable, isGeolocationEnabled, getPosition } = useGeolocated({
 		onSuccess: (position) => {
 			const { latitude, longitude } = position.coords;
@@ -42,9 +44,10 @@ const MainPage: React.FC = () => {
 
 	return (
 		<Main>
-			<NewPositionModal />
-			<RemovePositionModal />
-			<SettingsPositionModal />
+			{contextHolder}
+			<NewPositionModal messageApi={messageApi} />
+			<RemovePositionModal messageApi={messageApi} />
+			<SettingsPositionModal messageApi={messageApi} />
 
 			<Title>
 				Выберите геопозицию
